@@ -11,9 +11,14 @@ def consulMembers():
 
   members = {}
   for line in lines:
-    if line[2] == 'alive':
-      ip_addr = re.split(r'\:', line[1])
-      members[ line[0] ] = ip_addr[0]
+    if line[2] != 'alive':
+      continue
+
+    if line[3] != 'server':
+      continue
+
+    ip_addr = re.split(r'\:', line[1])
+    members[ line[0] ] = ip_addr[0]
 
   return members
 
